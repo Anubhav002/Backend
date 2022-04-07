@@ -6,17 +6,16 @@ const helmet= require("helmet");
 const morgan= require("morgan");
 const userRoute= require("./routes/users")
 const authRoute= require("./routes/auth")
+const postRoute = require("./routes/posts");
+
 
 
 dotenv.config();
-
-//databse connection
-mongoose.connect("mongodb://localhost/ecomdata")
-.then(()=>{console.log("connected")}).catch((err)=>{console.log(err)})
-
-
-
-
+mongoose.connect("mongodb://localhost/student").then(()=>{
+    console.log("connected");
+})
+app.use(express.json());
+app.use("/api/posts", postRoute);
 app.use("/api/users",userRoute)
 app.use("/api/auth",authRoute)
 
