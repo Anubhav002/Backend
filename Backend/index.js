@@ -11,7 +11,7 @@ dotenv.config();
 
 
  
-mongoose.connect("mongodb://localhost/studentdata")
+mongoose.connect("mongodb://localhost/student")
 .then(()=>{
      console.log("connected to mongodb");
 })
@@ -22,7 +22,6 @@ app.use(morgan("common"));
 app.use(helmet());
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
-
 
 
 app.listen(2000,()=>{
