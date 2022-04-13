@@ -2,12 +2,19 @@ const mongoose= require("mongoose");
 const { stringify } = require("nodemon/lib/utils");
 
 const UserSchema= new mongoose.Schema({
-    username:{
-        type:String,
-        required:true,
+    familyName:{
+        type:String, 
         min:3,
         max:20,
-        unique:true,
+    },
+    givenName:{
+        type:String, 
+        min:3,
+        max:20,
+    },
+    googleId:{
+        type:Number,
+        unique:true
     },
     email:{
         type:String,
@@ -16,11 +23,11 @@ const UserSchema= new mongoose.Schema({
         unique:true,
     },
     password:{
-        type:String,
-        required:true,
+        type:String,        
         min:6,
+        default:""
     },
-    profilePicture:{
+    imageUrl:{
         type:String,
         default:"",
     },

@@ -20,9 +20,9 @@ mongoose.connect("mongodb://localhost/student")
 app.use(express.json());
 app.use(morgan("common"));
 app.use(helmet());
-app.use("/api/users", userRoute);
-app.use("/api/auth", authRoute);
 
+app.use("/api/auth", authRoute);
+app.use("/api/users", userRoute);
 
 app.listen(2000,()=>{
      console.log("backend server is running")
