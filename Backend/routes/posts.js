@@ -55,19 +55,23 @@ router.get("/:id",async (req,res)=>{
 });
 
 //get feed post
-router.get("/feedPosts/all", async(req,res)=>{
-    let postArray = [];
+router.get("/feedPosts/:userId", async(req,res)=>{ 
+    
     try{
-        const currentUser = await User.findById(req.body.userId);
-        const userPosts = await Post.find({userId: currentUser._id});
-        const friendPosts = await Promise.all(
-            currentUser.followings.map((friendId)=>{
-                return Post.find({userId: friendId});
-            }) 
-        );
-        res.json(userPosts.concat(...friendPosts))
-    }catch(err){
-        res.status(500).json(err);
+        const currentUser = await User.findById(req.params.userId);
+        console.log(currentUser);
+        res.send({currentUser,id:req.params.userId});
+        // const userPosts = await post.find({userId: currentUser._id});
+        // const friendPosts = await Promise.all(
+        //     currentUser.followings.map((friendId)=>{
+        //         return Post.find({userId: friendId});
+        //     }) 
+        // );
+        // res.status(200).json(userPosts.cancat(...friendPosts));
+    } catch(err){
+        console.log(JSON.stringify(err));
+       res.status(500).json(err);
     }
 });
+
 module.exports = router;
